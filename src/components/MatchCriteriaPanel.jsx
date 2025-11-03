@@ -9,7 +9,7 @@ function MatchCriteriaPanel() {
   const [searchBarOpen, setSearchBarOpen] = useState(null)
   // Structure: { category: { qualifier: { mustHave: boolean, attributes: [] } } }
   const [selectedAttributes, setSelectedAttributes] = useState({})
-  const [version, setVersion] = useState(2) // Version toggle: 1, 2, 3, or 4
+  const [version, setVersion] = useState(2) // Version toggle: 1, 2, 3, 4, or 5
   const [currentQualifier, setCurrentQualifier] = useState({}) // Track current qualifier per category
   const [tooltipState, setTooltipState] = useState({ visible: false, text: '', position: { x: 0, y: 0 } })
 
@@ -157,7 +157,7 @@ function MatchCriteriaPanel() {
           </h2>
           {/* Version Toggle */}
           <div className="flex items-center gap-1 bg-[#f3f5f8] rounded-md p-0.5">
-            {[1, 2, 3, 4].map((v) => (
+            {[1, 2, 3, 4, 5].map((v) => (
               <button
                 key={v}
                 onClick={() => setVersion(v)}
@@ -613,6 +613,136 @@ function MatchCriteriaPanel() {
 
         {/* Version 4 */}
         {version === 4 && (
+          <div className="px-8 pt-6 pb-5">
+            <div className="flex flex-col gap-5 w-full">
+              {criteriaGroups.map((group, index) => (
+                <div key={index} className="relative">
+                  <div className="flex flex-col gap-1 w-full">
+                    {/* Group Header - Inline Buttons */}
+                    <div className="flex items-center justify-between pl-1 w-full">
+                      <h3
+                        className="text-[#101828] text-base font-medium"
+                        style={{ fontFamily: 'Roboto', lineHeight: '25.6px' }}
+                      >
+                        {group.title}
+                      </h3>
+                      <div className="flex items-center">
+                        {group.hasChevron && (
+                          <button
+                            onClick={() => handleBrowseAll(group.title)}
+                            onMouseEnter={(e) => handleTooltipShow(e, 'Browse all attributes')}
+                            onMouseLeave={handleTooltipHide}
+                            className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-[#f2f4f7] transition-colors cursor-pointer"
+                          >
+                            <span className="material-icons-round text-[#969dad]" style={{ fontSize: '18px' }}>
+                              list
+                            </span>
+                          </button>
+                        )}
+                        <button
+                          onClick={() => setSearchBarOpen(group.title)}
+                          onMouseEnter={(e) => handleTooltipShow(e, 'Add attributes')}
+                          onMouseLeave={handleTooltipHide}
+                          className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-[#f2f4f7] transition-colors cursor-pointer"
+                        >
+                          <span className="material-icons-round text-[#969dad]" style={{ fontSize: '18px' }}>
+                            add
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Selected Attributes - Multiple Qualifiers */}
+                    {selectedAttributes[group.title] && Object.keys(selectedAttributes[group.title]).length > 0 && (
+                      <div className="flex flex-col gap-4 p-1 w-full">
+                        {Object.entries(selectedAttributes[group.title]).map(([qualifier, data]) => (
+                          <div key={qualifier} className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                              <div className="relative">
+                                <select
+                                  value={data.mustHave ? 'must-have' : 'can-have'}
+                                  onChange={(e) => handleMustHaveChange(group.title, qualifier, e.target.value)}
+                                  className="appearance-none bg-[rgba(220,223,234,0.4)] text-[#101828] text-xs font-normal px-2 py-1 pr-6 rounded cursor-pointer outline-none"
+                                  style={{ fontFamily: 'Roboto', lineHeight: '14.4px' }}>
+                                  <option value="must-have">Must have</option>
+                                  <option value="can-have">Can have</option>
+                                </select>
+                                <span className="material-icons-round text-[#101828] absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none" style={{ fontSize: '14px' }}>
+                                  keyboard_arrow_down
+                                </span>
+                              </div>
+                              <p
+                                className="text-[#667085] text-xs font-normal"
+                                style={{ fontFamily: 'Roboto', lineHeight: '14.4px' }}
+                              >
+                                {qualifier.toLowerCase()} {group.title.toLowerCase()}
+                              </p>
+                            </div>
+                            <div className="flex flex-wrap gap-1.5">
+                              {data.attributes.map((attr, attrIndex) => (
+                                <div
+                                  key={attrIndex}
+                                  className="flex items-center gap-1 bg-[#e1efff] px-[10px] py-[4px] rounded-[16px]"
+                                >
+                                  <span
+                                    className="text-[#0f42bc] text-sm font-normal"
+                                    style={{ fontFamily: 'Roboto', lineHeight: '19.6px' }}
+                                  >
+                                    {attr}
+                                  </span>
+                                  <button
+                                    onClick={() => handleRemoveAttribute(group.title, qualifier, attr)}
+                                    className="flex items-center justify-center hover:opacity-70 transition-opacity"
+                                  >
+                                    <span
+                                      className="material-icons-round text-[#0f42bc]"
+                                      style={{ fontSize: '16px' }}
+                                    >
+                                      close
+                                    </span>
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Search Bar */}
+                    {searchBarOpen === group.title && (
+                      <div className="p-1 w-full relative">
+                        <div className="absolute left-1 top-0 z-30">
+                          <AttributeSearchBar
+                            category={group.title}
+                            onClose={() => setSearchBarOpen(null)}
+                            onSelect={(attribute) => handleSelectAttribute(group.title, attribute)}
+                            showBrowseAll={false}
+                            qualifier={currentQualifier[group.title] || 'Current'}
+                            onQualifierChange={(newQualifier) => handleQualifierChange(group.title, newQualifier)}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Blue Indicator */}
+                  {explorerOpen && selectedCategory === group.title && (
+                    <div className="absolute right-[-32px] top-0 bottom-0 w-[3px] bg-[#4599fa]" />
+                  )}
+
+                  {/* Divider */}
+                  {index < criteriaGroups.length - 1 && (
+                    <div className="h-px bg-[#dcdfea] w-full mt-5" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Version 5 */}
+        {version === 5 && (
           <div className="px-8 pt-6 pb-5">
             <div className="flex flex-col gap-5 w-full">
               {criteriaGroups.map((group, index) => (
