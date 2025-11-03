@@ -179,7 +179,7 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
                     <>
                       <option value="must-have">Must Have</option>
                       <option value="can-have">Can Have</option>
-                      <option value="excluded">Excluded</option>
+                      <option value="excluded">Exclude</option>
                     </>
                   ) : (
                     <>

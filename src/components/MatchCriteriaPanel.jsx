@@ -932,7 +932,7 @@ function MatchCriteriaPanel() {
                             {selectedAttributesV5[group.title]['must-have'].map((item, attrIndex) => (
                               <div
                                 key={attrIndex}
-                                className="relative flex items-center gap-1 bg-[#e1efff] px-[10px] py-[4px] rounded-[16px]"
+                                className="group relative flex items-center gap-1 bg-[#e1efff] hover:bg-[#cce4ff] px-[10px] py-[4px] rounded-[16px] transition-colors"
                               >
                                 <span
                                   className="text-[#0f42bc] text-sm font-normal"
@@ -946,7 +946,7 @@ function MatchCriteriaPanel() {
                                     const menuKey = `${group.title}-must-have-${item.attr}`
                                     setChipMenuOpen(chipMenuOpen === menuKey ? null : menuKey)
                                   }}
-                                  className="flex items-center justify-center hover:opacity-70 transition-opacity"
+                                  className="flex items-center justify-center hover:opacity-70 transition-opacity cursor-pointer"
                                 >
                                   <span
                                     className="material-icons-round text-[#0f42bc]"
@@ -957,7 +957,7 @@ function MatchCriteriaPanel() {
                                 </button>
                                 <button
                                   onClick={() => handleRemoveAttributeV5(group.title, 'must-have', item.attr)}
-                                  className="flex items-center justify-center hover:opacity-70 transition-opacity"
+                                  className="flex items-center justify-center hover:opacity-70 transition-opacity cursor-pointer"
                                 >
                                   <span
                                     className="material-icons-round text-[#0f42bc]"
@@ -1052,7 +1052,7 @@ function MatchCriteriaPanel() {
                             {selectedAttributesV5[group.title]['can-have'].map((item, attrIndex) => (
                               <div
                                 key={attrIndex}
-                                className="relative flex items-center gap-1 bg-[#e1efff] px-[10px] py-[4px] rounded-[16px]"
+                                className="group relative flex items-center gap-1 bg-[#e1efff] hover:bg-[#cce4ff] px-[10px] py-[4px] rounded-[16px] transition-colors"
                               >
                                 <span
                                   className="text-[#0f42bc] text-sm font-normal"
@@ -1066,7 +1066,7 @@ function MatchCriteriaPanel() {
                                     const menuKey = `${group.title}-can-have-${item.attr}`
                                     setChipMenuOpen(chipMenuOpen === menuKey ? null : menuKey)
                                   }}
-                                  className="flex items-center justify-center hover:opacity-70 transition-opacity"
+                                  className="flex items-center justify-center hover:opacity-70 transition-opacity cursor-pointer"
                                 >
                                   <span
                                     className="material-icons-round text-[#0f42bc]"
@@ -1077,7 +1077,7 @@ function MatchCriteriaPanel() {
                                 </button>
                                 <button
                                   onClick={() => handleRemoveAttributeV5(group.title, 'can-have', item.attr)}
-                                  className="flex items-center justify-center hover:opacity-70 transition-opacity"
+                                  className="flex items-center justify-center hover:opacity-70 transition-opacity cursor-pointer"
                                 >
                                   <span
                                     className="material-icons-round text-[#0f42bc]"
@@ -1166,13 +1166,13 @@ function MatchCriteriaPanel() {
                             className="text-[#667085] text-sm font-normal"
                             style={{ fontFamily: 'Roboto', lineHeight: '19.6px' }}
                           >
-                            Excluded
+                            Exclude
                           </p>
                           <div className="flex flex-wrap gap-1.5">
                             {selectedAttributesV5[group.title]['excluded'].map((item, attrIndex) => (
                               <div
                                 key={attrIndex}
-                                className="relative flex items-center gap-1 bg-[#e1efff] px-[10px] py-[4px] rounded-[16px]"
+                                className="group relative flex items-center gap-1 bg-[#e1efff] hover:bg-[#cce4ff] px-[10px] py-[4px] rounded-[16px] transition-colors"
                               >
                                 <span
                                   className="text-[#0f42bc] text-sm font-normal"
@@ -1186,7 +1186,7 @@ function MatchCriteriaPanel() {
                                     const menuKey = `${group.title}-excluded-${item.attr}`
                                     setChipMenuOpen(chipMenuOpen === menuKey ? null : menuKey)
                                   }}
-                                  className="flex items-center justify-center hover:opacity-70 transition-opacity"
+                                  className="flex items-center justify-center hover:opacity-70 transition-opacity cursor-pointer"
                                 >
                                   <span
                                     className="material-icons-round text-[#0f42bc]"
@@ -1197,7 +1197,7 @@ function MatchCriteriaPanel() {
                                 </button>
                                 <button
                                   onClick={() => handleRemoveAttributeV5(group.title, 'excluded', item.attr)}
-                                  className="flex items-center justify-center hover:opacity-70 transition-opacity"
+                                  className="flex items-center justify-center hover:opacity-70 transition-opacity cursor-pointer"
                                 >
                                   <span
                                     className="material-icons-round text-[#0f42bc]"
@@ -1394,6 +1394,7 @@ function MatchCriteriaPanel() {
           <AttributeExplorer
             category={selectedCategory}
             onClose={handleCloseExplorer}
+            version={version}
           />
         </div>
       )}

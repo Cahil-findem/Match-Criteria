@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function AttributeExplorer({ category, onClose }) {
+function AttributeExplorer({ category, onClose, version = 1 }) {
   const [isClosing, setIsClosing] = useState(false)
 
   const handleClose = () => {
@@ -111,7 +111,7 @@ function AttributeExplorer({ category, onClose }) {
               className="text-[#101828] text-xs font-normal"
               style={{ fontFamily: 'Roboto', lineHeight: '14.4px' }}
             >
-              Past/current
+              {version === 5 ? 'Must Have' : 'Past/current'}
             </p>
             <span className="material-icons-round text-[#101828] text-sm">
               keyboard_arrow_down
