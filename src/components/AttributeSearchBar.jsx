@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 
-function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false, onBrowseAll, removeButtonBackground = false, qualifier = 'Current', onQualifierChange }) {
+function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false, onBrowseAll, removeButtonBackground = false, qualifier = 'Current', onQualifierChange, useMustHaveQualifier = false }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [isClosing, setIsClosing] = useState(false)
   const [selectedQualifier, setSelectedQualifier] = useState(qualifier)
@@ -175,9 +175,19 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
                   className="appearance-none bg-transparent text-[#465366] text-[13px] font-normal outline-none cursor-pointer pl-1 pr-5"
                   style={{ fontFamily: 'Roboto', lineHeight: '22px' }}
                 >
-                  <option value="Current">Current</option>
-                  <option value="Past">Past</option>
-                  <option value="Recent">Recent</option>
+                  {useMustHaveQualifier ? (
+                    <>
+                      <option value="must-have">Must Have</option>
+                      <option value="can-have">Can Have</option>
+                      <option value="excluded">Excluded</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="Current">Current</option>
+                      <option value="Past">Past</option>
+                      <option value="Recent">Recent</option>
+                    </>
+                  )}
                 </select>
                 <span className="material-icons-round text-lg absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-[#465366]">
                   expand_more
