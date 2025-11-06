@@ -1,15 +1,25 @@
 import { useState, useRef, useEffect } from 'react'
+import BooleanModal from './BooleanModal'
 
-function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false, onBrowseAll, removeButtonBackground = false, qualifier = 'Current', onQualifierChange, useMustHaveQualifier = false }) {
+function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false, onBrowseAll, removeButtonBackground = false, qualifier = 'Current', onQualifierChange, useMustHaveQualifier = false, timeQualifier = 'Current', onTimeQualifierChange, showBoolean = true, version }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [isClosing, setIsClosing] = useState(false)
   const [selectedQualifier, setSelectedQualifier] = useState(qualifier)
+  const [selectedTimeQualifier, setSelectedTimeQualifier] = useState(timeQualifier)
+  const [showBooleanModal, setShowBooleanModal] = useState(false)
   const containerRef = useRef(null)
 
   const handleQualifierChange = (newQualifier) => {
     setSelectedQualifier(newQualifier)
     if (onQualifierChange) {
       onQualifierChange(newQualifier)
+    }
+  }
+
+  const handleTimeQualifierChange = (newTimeQualifier) => {
+    setSelectedTimeQualifier(newTimeQualifier)
+    if (onTimeQualifierChange) {
+      onTimeQualifierChange(newTimeQualifier)
     }
   }
 
@@ -31,8 +41,10 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
     },
     'Job Title': {
       placeholder: 'Search for job titles...',
-      header: 'Recommended Job Titles',
-      items: [
+      header: version === 4 ? '' : 'Recommended Job Titles',
+      items: version === 4 ? [
+        'Insert boolean string'
+      ] : [
         'Software Engineer',
         'Front-End Engineer',
         'Full-Stack Engineer',
@@ -59,8 +71,10 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
     },
     'Skills': {
       placeholder: 'Search for skills...',
-      header: 'Recommended Skills',
-      items: [
+      header: version === 4 ? '' : 'Recommended Skills',
+      items: version === 4 ? [
+        'Insert boolean string'
+      ] : [
         'React',
         'Python',
         'JavaScript',
@@ -205,25 +219,25 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
             {/* Scrollable Content */}
             <div className="flex-1 overflow-x-hidden overflow-y-auto p-1">
               {/* Suggested Header */}
-              <div className="flex gap-2.5 items-center overflow-hidden pl-2 py-2.5 rounded-lg shrink-0 w-[288px]">
-              <div className="flex gap-1 items-center text-[#667085]">
-                <p
-                  className="text-xs font-normal"
-                  style={{ fontFamily: 'Roboto', lineHeight: '14.4px' }}
-                >
-                  {currentData.header}
-                </p>
-              </div>
-            </div>
+              {currentData.header && (
+                <div className="flex gap-2.5 items-center overflow-hidden pl-2 py-2.5 rounded-lg shrink-0 w-[288px]">
+                  <div className="flex gap-1 items-center text-[#667085]">
+                    <p
+                      className="text-xs font-normal"
+                      style={{ fontFamily: 'Roboto', lineHeight: '14.4px' }}
+                    >
+                      {currentData.header}
+                    </p>
+                  </div>
+                </div>
+              )}
 
               {/* Suggested Items */}
               {suggestedItems.map((item, index) => (
                 <button
                   key={index}
                   onClick={() => onSelect(item)}
-                  className={`flex gap-2.5 items-center overflow-hidden px-2 py-1.5 rounded shrink-0 w-[288px] hover:bg-gray-100 transition-colors cursor-pointer ${
-                    index === 0 ? 'bg-[#f2f4f7]' : ''
-                  }`}
+                  className="flex gap-2.5 items-center overflow-hidden px-2 py-1.5 rounded shrink-0 w-[288px] hover:bg-gray-100 transition-colors cursor-pointer"
                 >
                   <div className="flex gap-1 items-start flex-1">
                     <p
@@ -238,47 +252,65 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
             </div>
 
             {/* Bottom Buttons - Sticky */}
-            <div className="border-t border-[#eaecf0] h-10 shrink-0">
-              <div className="flex h-10 items-end justify-center overflow-hidden">
-                {showBrowseAll && (
-                  <button
-                    onClick={() => {
-                      handleClose()
-                      onBrowseAll()
-                    }}
-                    className={`w-full flex gap-1.5 h-full items-center justify-center overflow-hidden px-3 py-2 text-sm transition-colors cursor-pointer border-r border-[#eaecf0] ${
-                      removeButtonBackground ? 'hover:bg-gray-100' : 'bg-[#f3f5f8] hover:bg-gray-200'
-                    }`}
-                  >
-                    <span className="material-icons-round text-[#667085]" style={{ fontSize: '18px' }}>
-                      list
-                    </span>
-                    <span
-                      className="text-[#465366] font-normal"
-                      style={{ fontFamily: 'Roboto', lineHeight: '19.6px' }}
+            {(showBrowseAll || showBoolean) && (
+              <div className="border-t border-[#eaecf0] h-10 shrink-0">
+                <div className="flex h-10 items-end justify-center overflow-hidden">
+                  {showBrowseAll && (
+                    <button
+                      onClick={() => {
+                        handleClose()
+                        onBrowseAll()
+                      }}
+                      className={`w-full flex gap-1.5 h-full items-center justify-center overflow-hidden px-3 py-2 text-sm transition-colors cursor-pointer border-r border-[#eaecf0] ${
+                        removeButtonBackground ? 'hover:bg-gray-100' : 'bg-[#f3f5f8] hover:bg-gray-200'
+                      }`}
                     >
-                      Browse all
-                    </span>
-                  </button>
-                )}
-                <button className={`w-full flex gap-1.5 h-full items-center justify-center overflow-hidden px-3 py-2 text-sm transition-colors cursor-pointer ${
-                  removeButtonBackground ? 'hover:bg-gray-100' : 'bg-[#f3f5f8] hover:bg-gray-200'
-                }`}>
-                  <span className="material-icons-round text-[#667085]" style={{ fontSize: '18px' }}>
-                    join_left
-                  </span>
-                  <span
-                    className="text-[#465366] font-normal"
-                    style={{ fontFamily: 'Roboto', lineHeight: '19.6px' }}
-                  >
-                    Boolean
-                  </span>
-                </button>
+                      <span className="material-icons-round text-[#667085]" style={{ fontSize: '18px' }}>
+                        list
+                      </span>
+                      <span
+                        className="text-[#465366] font-normal"
+                        style={{ fontFamily: 'Roboto', lineHeight: '19.6px' }}
+                      >
+                        Browse all
+                      </span>
+                    </button>
+                  )}
+                  {showBoolean && (
+                    <button
+                      onClick={() => setShowBooleanModal(true)}
+                      className={`w-full flex gap-1.5 h-full items-center justify-center overflow-hidden px-3 py-2 text-sm transition-colors cursor-pointer ${
+                        removeButtonBackground ? 'hover:bg-gray-100' : 'bg-[#f3f5f8] hover:bg-gray-200'
+                      }`}
+                    >
+                      <span className="material-icons-round text-[#667085]" style={{ fontSize: '18px' }}>
+                        join_left
+                      </span>
+                      <span
+                        className="text-[#465366] font-normal"
+                        style={{ fontFamily: 'Roboto', lineHeight: '19.6px' }}
+                      >
+                        Boolean
+                      </span>
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Boolean Modal */}
+      {showBooleanModal && (
+        <BooleanModal
+          category={category}
+          onClose={() => setShowBooleanModal(false)}
+          onApply={() => {
+            // Handle apply logic
+          }}
+        />
+      )}
     </div>
   )
 }
