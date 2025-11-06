@@ -361,8 +361,6 @@ function MatchCriteriaPanel() {
               <option value={2}>Version 2</option>
               <option value={3}>Version 3</option>
               <option value={4}>Version 4</option>
-              <option value={5}>Overhall</option>
-              <option value={6}>Boolean</option>
             </select>
             <span className="material-icons-round text-[#969dad] absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" style={{ fontSize: '18px' }}>
               expand_more
