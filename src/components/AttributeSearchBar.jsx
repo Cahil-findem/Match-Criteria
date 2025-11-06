@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 
-function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false, onBrowseAll, removeButtonBackground = false, qualifier = 'Current', onQualifierChange, useMustHaveQualifier = false, timeQualifier = 'Current', onTimeQualifierChange, showBoolean = true, version }) {
+function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false, onBrowseAll, removeButtonBackground = false, qualifier = 'Current', onQualifierChange, useMustHaveQualifier = false, timeQualifier = 'Current', onTimeQualifierChange, showBoolean = true, onBooleanClick, version }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [isClosing, setIsClosing] = useState(false)
   const [selectedQualifier, setSelectedQualifier] = useState(qualifier)
@@ -250,7 +250,7 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
             </div>
 
             {/* Bottom Buttons - Sticky */}
-            {(showBrowseAll || showBoolean) && (
+            {(showBrowseAll || (showBoolean && (category === 'Skills' || category === 'Job Title' || category === 'Companies'))) && (
               <div className="border-t border-[#eaecf0] h-10 shrink-0">
                 <div className="flex h-10 items-end justify-center overflow-hidden">
                   {showBrowseAll && (
@@ -259,7 +259,9 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
                         handleClose()
                         onBrowseAll()
                       }}
-                      className={`w-full flex gap-1.5 h-full items-center justify-center overflow-hidden px-3 py-2 text-sm transition-colors cursor-pointer border-r border-[#eaecf0] ${
+                      className={`w-full flex gap-1.5 h-full items-center justify-center overflow-hidden px-3 py-2 text-sm transition-colors cursor-pointer ${
+                        (showBoolean && (category === 'Skills' || category === 'Job Title' || category === 'Companies')) ? 'border-r border-[#eaecf0]' : ''
+                      } ${
                         removeButtonBackground ? 'hover:bg-gray-100' : 'bg-[#f3f5f8] hover:bg-gray-200'
                       }`}
                     >
@@ -271,6 +273,29 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
                         style={{ fontFamily: 'Roboto', lineHeight: '19.6px' }}
                       >
                         Browse all
+                      </span>
+                    </button>
+                  )}
+                  {showBoolean && (category === 'Skills' || category === 'Job Title' || category === 'Companies') && (
+                    <button
+                      onClick={() => {
+                        handleClose()
+                        if (onBooleanClick) {
+                          onBooleanClick()
+                        }
+                      }}
+                      className={`w-full flex gap-1.5 h-full items-center justify-center overflow-hidden px-3 py-2 text-sm transition-colors cursor-pointer ${
+                        removeButtonBackground ? 'hover:bg-gray-100' : 'bg-[#f3f5f8] hover:bg-gray-200'
+                      }`}
+                    >
+                      <span className="material-icons-round text-[#667085]" style={{ fontSize: '18px' }}>
+                        data_object
+                      </span>
+                      <span
+                        className="text-[#465366] font-normal"
+                        style={{ fontFamily: 'Roboto', lineHeight: '19.6px' }}
+                      >
+                        Boolean
                       </span>
                     </button>
                   )}

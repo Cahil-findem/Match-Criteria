@@ -331,6 +331,11 @@ function MatchCriteriaPanel() {
     })
   }
 
+  const handleBooleanClick = (category) => {
+    setBooleanModalCategory(category)
+    setBooleanModalOpen(true)
+  }
+
   return (
     <div className="relative h-full flex border-r border-[#eaecf0]">
       {/* Match Criteria Panel */}
@@ -510,6 +515,7 @@ function MatchCriteriaPanel() {
                             qualifier={currentQualifier[group.title] || 'Current'}
                             onQualifierChange={(newQualifier) => handleQualifierChange(group.title, newQualifier)}
                             showBoolean={shouldShowBoolean(group.title)}
+                            onBooleanClick={() => handleBooleanClick(group.title)}
                             version={version}
                           />
                         </div>

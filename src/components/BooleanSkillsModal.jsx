@@ -103,7 +103,11 @@ function BooleanSkillsModal({ category, onClose, onApply, qualifier }) {
                         type="text"
                         value={skill}
                         onChange={(e) => handleSkillChange(groupIndex, skillIndex, e.target.value)}
-                        placeholder="Enter skill..."
+                        placeholder={
+                          category === 'Job Title' ? 'Enter job title...' :
+                          category === 'Companies' ? 'Enter company...' :
+                          'Enter skill...'
+                        }
                         className="flex-1 px-3 py-2 border border-[#d0d5dd] rounded-lg text-[#101828] text-sm outline-none focus:border-[#4599fa]"
                         style={{ fontFamily: 'Roboto' }}
                       />
@@ -124,7 +128,7 @@ function BooleanSkillsModal({ category, onClose, onApply, qualifier }) {
                     style={{ fontFamily: 'Roboto' }}
                   >
                     <span className="material-icons-round" style={{ fontSize: '18px' }}>add</span>
-                    Add OR skill
+                    Add OR {category === 'Job Title' ? 'job title' : category === 'Companies' ? 'company' : 'skill'}
                   </button>
                 </div>
 
