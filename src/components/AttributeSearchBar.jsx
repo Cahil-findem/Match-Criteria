@@ -1,12 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
-import BooleanModal from './BooleanModal'
 
 function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false, onBrowseAll, removeButtonBackground = false, qualifier = 'Current', onQualifierChange, useMustHaveQualifier = false, timeQualifier = 'Current', onTimeQualifierChange, showBoolean = true, version }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [isClosing, setIsClosing] = useState(false)
   const [selectedQualifier, setSelectedQualifier] = useState(qualifier)
   const [selectedTimeQualifier, setSelectedTimeQualifier] = useState(timeQualifier)
-  const [showBooleanModal, setShowBooleanModal] = useState(false)
   const containerRef = useRef(null)
 
   const handleQualifierChange = (newQualifier) => {
@@ -41,8 +39,8 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
     },
     'Job Title': {
       placeholder: 'Search for job titles...',
-      header: version === 4 ? '' : 'Recommended Job Titles',
-      items: version === 4 ? [
+      header: version === 6 ? '' : 'Recommended Job Titles',
+      items: version === 6 ? [
         'Insert boolean string'
       ] : [
         'Software Engineer',
@@ -71,8 +69,8 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
     },
     'Skills': {
       placeholder: 'Search for skills...',
-      header: version === 4 ? '' : 'Recommended Skills',
-      items: version === 4 ? [
+      header: version === 6 ? '' : 'Recommended Skills',
+      items: version === 6 ? [
         'Insert boolean string'
       ] : [
         'React',
@@ -276,41 +274,12 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
                       </span>
                     </button>
                   )}
-                  {showBoolean && (
-                    <button
-                      onClick={() => setShowBooleanModal(true)}
-                      className={`w-full flex gap-1.5 h-full items-center justify-center overflow-hidden px-3 py-2 text-sm transition-colors cursor-pointer ${
-                        removeButtonBackground ? 'hover:bg-gray-100' : 'bg-[#f3f5f8] hover:bg-gray-200'
-                      }`}
-                    >
-                      <span className="material-icons-round text-[#667085]" style={{ fontSize: '18px' }}>
-                        join_left
-                      </span>
-                      <span
-                        className="text-[#465366] font-normal"
-                        style={{ fontFamily: 'Roboto', lineHeight: '19.6px' }}
-                      >
-                        Boolean
-                      </span>
-                    </button>
-                  )}
                 </div>
               </div>
             )}
           </div>
         </div>
       </div>
-
-      {/* Boolean Modal */}
-      {showBooleanModal && (
-        <BooleanModal
-          category={category}
-          onClose={() => setShowBooleanModal(false)}
-          onApply={() => {
-            // Handle apply logic
-          }}
-        />
-      )}
     </div>
   )
 }
