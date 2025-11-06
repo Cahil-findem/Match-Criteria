@@ -3,6 +3,7 @@ import AttributeExplorer from './AttributeExplorer'
 import AttributeSearchBar from './AttributeSearchBar'
 import BooleanSkillsDisplay from './BooleanSkillsDisplay'
 import BooleanSkillsModal from './BooleanSkillsModal'
+import BooleanModal from './BooleanModal'
 
 function MatchCriteriaPanel() {
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -1903,17 +1904,28 @@ function MatchCriteriaPanel() {
         </div>
       )}
 
-      {/* Boolean Skills Modal */}
+      {/* Boolean Modal - Conditional based on version */}
       {booleanModalOpen && booleanModalCategory && (
-        <BooleanSkillsModal
-          category={booleanModalCategory}
-          qualifier={currentQualifier[booleanModalCategory] || 'Current'}
-          onClose={() => {
-            setBooleanModalOpen(false)
-            setBooleanModalCategory(null)
-          }}
-          onApply={handleBooleanSkillsApply}
-        />
+        version >= 1 && version <= 4 ? (
+          <BooleanModal
+            category={booleanModalCategory}
+            onClose={() => {
+              setBooleanModalOpen(false)
+              setBooleanModalCategory(null)
+            }}
+            onApply={handleBooleanSkillsApply}
+          />
+        ) : (
+          <BooleanSkillsModal
+            category={booleanModalCategory}
+            qualifier={currentQualifier[booleanModalCategory] || 'Current'}
+            onClose={() => {
+              setBooleanModalOpen(false)
+              setBooleanModalCategory(null)
+            }}
+            onApply={handleBooleanSkillsApply}
+          />
+        )
       )}
     </div>
   )
