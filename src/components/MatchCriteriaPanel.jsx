@@ -1906,7 +1906,7 @@ function MatchCriteriaPanel() {
 
       {/* Boolean Modal - Conditional based on version */}
       {booleanModalOpen && booleanModalCategory && (
-        version >= 1 && version <= 4 ? (
+        (version >= 1 && version <= 4) ? (
           <BooleanModal
             category={booleanModalCategory}
             onClose={() => {
