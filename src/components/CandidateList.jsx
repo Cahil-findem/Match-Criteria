@@ -14,25 +14,25 @@ const candidates = [
         title: 'Staff Software Engineer',
         company: 'Meta',
         period: 'Mar 2020 - Present',
-        logo: 'https://logo.clearbit.com/meta.com'
+        logo: 'https://www.google.com/s2/favicons?domain=meta.com&sz=128'
       },
       {
         title: 'Senior Software Engineer',
         company: 'Amazon',
         period: 'Jan 2017 - Mar 2020',
-        logo: 'https://logo.clearbit.com/amazon.com'
+        logo: 'https://www.google.com/s2/favicons?domain=amazon.com&sz=128'
       },
       {
         title: 'Software Engineer',
         company: 'Microsoft',
         period: 'Jun 2014 - Dec 2016',
-        logo: 'https://logo.clearbit.com/microsoft.com'
+        logo: 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=128'
       },
       {
         title: 'Junior Software Engineer',
         company: 'Salesforce',
         period: 'Aug 2012 - May 2014',
-        logo: 'https://logo.clearbit.com/salesforce.com'
+        logo: 'https://www.google.com/s2/favicons?domain=salesforce.com&sz=128'
       }
     ],
     education: {
@@ -53,25 +53,25 @@ const candidates = [
         title: 'Lead Engineer',
         company: 'Stripe',
         period: 'Feb 2022 - Present',
-        logo: 'https://logo.clearbit.com/stripe.com'
+        logo: 'https://www.google.com/s2/favicons?domain=stripe.com&sz=128'
       },
       {
         title: 'Senior Engineer',
         company: 'Shopify',
         period: 'May 2019 - Jan 2022',
-        logo: 'https://logo.clearbit.com/shopify.com'
+        logo: 'https://www.google.com/s2/favicons?domain=shopify.com&sz=128'
       },
       {
         title: 'Software Engineer',
         company: 'Square',
         period: 'Jul 2017 - Apr 2019',
-        logo: 'https://logo.clearbit.com/squareup.com'
+        logo: 'https://www.google.com/s2/favicons?domain=squareup.com&sz=128'
       },
       {
         title: 'Associate Engineer',
         company: 'PayPal',
         period: 'Jun 2016 - Jun 2017',
-        logo: 'https://logo.clearbit.com/paypal.com'
+        logo: 'https://www.google.com/s2/favicons?domain=paypal.com&sz=128'
       }
     ],
     education: {
@@ -92,31 +92,31 @@ const candidates = [
         title: 'Principal Engineer',
         company: 'Netflix',
         period: 'Jan 2019 - Present',
-        logo: 'https://logo.clearbit.com/netflix.com'
+        logo: 'https://www.google.com/s2/favicons?domain=netflix.com&sz=128'
       },
       {
         title: 'Senior Staff Engineer',
         company: 'Uber',
         period: 'Mar 2016 - Dec 2018',
-        logo: 'https://logo.clearbit.com/uber.com'
+        logo: 'https://www.google.com/s2/favicons?domain=uber.com&sz=128'
       },
       {
         title: 'Senior Engineer',
         company: 'Airbnb',
         period: 'Aug 2013 - Feb 2016',
-        logo: 'https://logo.clearbit.com/airbnb.com'
+        logo: 'https://www.google.com/s2/favicons?domain=airbnb.com&sz=128'
       },
       {
         title: 'Software Engineer',
         company: 'LinkedIn',
         period: 'Jun 2011 - Jul 2013',
-        logo: 'https://logo.clearbit.com/linkedin.com'
+        logo: 'https://www.google.com/s2/favicons?domain=linkedin.com&sz=128'
       },
       {
         title: 'Junior Engineer',
         company: 'Twitter',
         period: 'Jul 2009 - May 2011',
-        logo: 'https://logo.clearbit.com/twitter.com'
+        logo: 'https://www.google.com/s2/favicons?domain=twitter.com&sz=128'
       }
     ],
     education: {

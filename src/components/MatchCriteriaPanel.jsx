@@ -14,8 +14,8 @@ function MatchCriteriaPanel() {
   // Structure for Overhall (5): { category: { priority: [{ attr, timeQualifier }] } }
   // where priority is 'must-have', 'can-have', or 'excluded'
   const [selectedAttributesV5, setSelectedAttributesV5] = useState({})
-  const [version, setVersion] = useState(2) // Version toggle: 1, 2, 3, or Overhall (5)
-  const [currentQualifier, setCurrentQualifier] = useState({}) // Track current time qualifier per category for V1-V3 (Current/Past/Recent)
+  const [version, setVersion] = useState(1) // Version toggle: 1, 2, 3, 4, 5 (Overhall), or 6 (Boolean)
+  const [currentQualifier, setCurrentQualifier] = useState({}) // Track current time qualifier per category for V1-V4 (Current/Past/Recent)
   const [currentPriorityV5, setCurrentPriorityV5] = useState({}) // Track current priority qualifier per category for V5 (must-have/can-have/excluded)
   const [currentTimeQualifier, setCurrentTimeQualifier] = useState({}) // Track current time qualifier per category for V5
   const [categoryMustHave, setCategoryMustHave] = useState({}) // Track Must Have toggle per category (V1-V3)
