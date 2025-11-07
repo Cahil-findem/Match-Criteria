@@ -106,17 +106,6 @@ function AttributeExplorer({ category, onClose, version = 1 }) {
               {category}
             </h3>
           </div>
-          <div className="bg-[rgba(220,223,234,0.4)] flex gap-1 items-center overflow-hidden pl-1.5 pr-1 py-1 rounded-[4px]">
-            <p
-              className="text-[#101828] text-xs font-normal"
-              style={{ fontFamily: 'Roboto', lineHeight: '14.4px' }}
-            >
-              {version === 5 ? 'Must Have' : 'Past/current'}
-            </p>
-            <span className="material-icons-round text-[#101828] text-sm">
-              keyboard_arrow_down
-            </span>
-          </div>
         </div>
 
         {/* Category List */}
