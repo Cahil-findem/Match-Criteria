@@ -747,15 +747,15 @@ function MatchCriteriaPanel() {
                       >
                         {group.title}
                       </h3>
-                      <div className="flex gap-1 items-center px-1 py-[3px] rounded-lg">
+                      <div className="flex gap-[2px] items-center px-1 py-[3px] rounded-lg">
                         <span
-                          className="text-[#465366] text-sm font-normal opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="text-[#465366] group-hover:text-[#667085] text-sm font-normal opacity-0 group-hover:opacity-100 transition-opacity"
                           style={{ fontFamily: 'Roboto', lineHeight: '20px' }}
                         >
                           Browse all
                         </span>
                         <span
-                          className="material-icons-round text-[#969dad]"
+                          className="material-icons-round text-[#969dad] group-hover:text-[#667085]"
                           style={{ fontSize: '24px' }}
                         >
                           chevron_right
