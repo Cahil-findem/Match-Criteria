@@ -265,8 +265,8 @@ function AttributeSearchBar({ category, onClose, onSelect, showBrowseAll = false
                         removeButtonBackground ? 'hover:bg-gray-100' : 'bg-[#f3f5f8] hover:bg-gray-200'
                       }`}
                     >
-                      <span className="material-symbols-outlined text-[#667085]" style={{ fontSize: '18px' }}>
-                        import_contacts
+                      <span className="material-icons-round text-[#667085]" style={{ fontSize: '18px' }}>
+                        menu_book
                       </span>
                       <span
                         className="text-[#465366] font-normal"
