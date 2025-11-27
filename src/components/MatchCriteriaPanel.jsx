@@ -15,7 +15,7 @@ function MatchCriteriaPanel() {
   // Structure for Overhall (5): { category: { priority: [{ attr, timeQualifier }] } }
   // where priority is 'must-have', 'can-have', or 'excluded'
   const [selectedAttributesV5, setSelectedAttributesV5] = useState({})
-  const [version, setVersion] = useState(1) // Version toggle: 1, 2, 3, 4, 5 (Overhall), or 6 (Boolean)
+  const [version, setVersion] = useState(4) // Version toggle: 1, 2, 3, 4, 5 (Overhall), or 6 (Boolean)
   const [currentQualifier, setCurrentQualifier] = useState({}) // Track current time qualifier per category for V1-V4 (Current/Past/Recent)
   const [currentPriorityV5, setCurrentPriorityV5] = useState({}) // Track current priority qualifier per category for V5 (must-have/can-have/excluded)
   const [currentTimeQualifier, setCurrentTimeQualifier] = useState({}) // Track current time qualifier per category for V5
@@ -349,23 +349,6 @@ function MatchCriteriaPanel() {
           >
             Match Criteria
           </h2>
-          {/* Version Dropdown */}
-          <div className="relative">
-            <select
-              value={version}
-              onChange={(e) => setVersion(Number(e.target.value))}
-              className="appearance-none bg-[#f9fafb] border border-[#eaecf0] rounded-lg pl-3 pr-8 py-1.5 text-[#667085] text-sm font-normal outline-none hover:bg-[#f3f5f8] focus:border-[#d0d5dd] focus:bg-white cursor-pointer transition-colors"
-              style={{ fontFamily: 'Roboto', lineHeight: '20px' }}
-            >
-              <option value={1}>Version 1</option>
-              <option value={2}>Version 2</option>
-              <option value={3}>Version 3</option>
-              <option value={4}>Version 4</option>
-            </select>
-            <span className="material-icons-round text-[#969dad] absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" style={{ fontSize: '18px' }}>
-              expand_more
-            </span>
-          </div>
         </div>
 
       {/* Scrollable Content */}
